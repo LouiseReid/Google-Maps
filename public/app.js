@@ -9,7 +9,8 @@ var initialise = function(){
 
   var georgeSq = {lat: 55.861152, lng: -4.250196};
   mainMap.addMarker(georgeSq);
-  mainMap.addInfoWindow();
+  // georgeSq.addEventListener('click', mainMap.addInfoWindow());
+  // mainMap.addInfoWindow();
 
 
   var bounceButton = document.getElementById('button-bounce-markers');
@@ -20,6 +21,9 @@ var initialise = function(){
 
   var location = document.getElementById('locate');
   location.addEventListener('click', mainMap.location.bind(mainMap));
+
+  var deleteMarker = document.getElementById('delete-marker');
+  deleteMarker.addEventListener('click', mainMap.removeMarker.bind(mainMap))
 
 }
 

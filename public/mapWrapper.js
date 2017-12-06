@@ -11,6 +11,7 @@ MapWrapper.prototype.addMarker = function(coords){
     position: coords,
     map: this.googleMap
   });
+  marker.addListener('click', function(){this.addInfoWindow(marker)}.bind(this))
   this.markers.push(marker);
 }
 
@@ -26,11 +27,10 @@ MapWrapper.prototype.bounceMarkers = function(){
   })
 }
 
-MapWrapper.prototype.addInfoWindow = function(){
+MapWrapper.prototype.addInfoWindow = function(marker){
   var infoWindow = new google.maps.InfoWindow({
     content: "This is george square, an ice rink might be here",
   });
-  var marker = this.markers[1];
   infoWindow.open(this.googleMap, marker)
 }
 
@@ -44,4 +44,11 @@ MapWrapper.prototype.location = function(){
     var lng = position.coords.longitude;
     this.googleMap.setCenter({lat, lng});
   }.bind(this));
+}
+
+MapWrapper.prototype.removeMarker= function(){
+  if(this.markers.length > 1){
+    var lastMarker = this.markers.pop();
+    lastMarker.setMap(null);
+  }
 }
